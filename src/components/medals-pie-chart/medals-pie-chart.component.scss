@@ -1,0 +1,53 @@
+.chart-container {
+  width: 100vw;
+  height: 600px;
+  display: block;
+
+  @media (max-width: 768px) {
+    height: 300px;
+  }
+}
+
+::ng-deep {
+  .ngx-charts-tooltip-content::after,
+  .ngx-charts-tooltip-content::before {
+    display: none !important;
+  }
+  .ngx-charts-tooltip-content {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
+
+    .tooltip-caret {
+      border-top-color: var(--primary-color) !important;
+    }
+
+    .tooltip-label {
+      font-weight: 600 !important;
+      margin-bottom: 4px !important;
+    }
+
+    .tooltip-val {
+      font-weight: 500 !important;
+
+      &::before {
+        content: "🏅 ";
+        margin-right: 4px;
+      }
+    }
+  }
+  .pie-label {
+    font-size: 1.125rem !important;
+    font-weight: 500;
+    color: #333;
+    @media (max-width: 768px) {
+      font-size: 0.675rem !important;
+    }
+  }
+
+  .ngx-charts-tooltip-content::after {
+    border-top-color: var(--primary-color) !important;
+  }
+}

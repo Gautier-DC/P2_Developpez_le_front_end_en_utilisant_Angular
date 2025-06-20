@@ -1,1 +1,11 @@
-<p>medals-pie-chart works!</p>
+<div class="chart-container">
+  <ngx-charts-pie-chart
+    [results]="chartData"
+    [labels]="showLabels"
+    [doughnut]="false"
+    [gradient]="false"
+    [labelFormatting]="labelFormatting"
+    (select)="onSelect($event)"
+  >
+  </ngx-charts-pie-chart>
+</div>
