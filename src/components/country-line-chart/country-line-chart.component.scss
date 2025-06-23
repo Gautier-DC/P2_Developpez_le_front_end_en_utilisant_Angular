@@ -1,7 +1,30 @@
-.ng-star-inserted {
-  font-size: 1.5rem;
-  opacity: .5;
-  text{
-    font-size: 1.5rem;
+::ng-deep {
+  .ngx-charts-tooltip-content::after,
+  .ngx-charts-tooltip-content::before {
+    display: none !important;
+  }
+  
+  .ngx-charts-tooltip-content {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    border: none !important;
+
+
+    .tooltip-val {
+      font-weight: 500 !important;
+
+      &::before {
+        content: "🏅 ";
+        margin-right: 4px;
+      }
+    }
+  }
+  .position-top .tooltip-caret {
+    border-top-color: var(--primary-color) !important;
+  }
+
+  .position-right .tooltip-caret {
+    border-right-color: var(--primary-color) !important;
   }
 }

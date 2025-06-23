@@ -64,6 +64,6 @@ export class MedalsPieChartComponent implements OnInit {
   
   onSelect(event: any) {
     const country = event.name.toLowerCase();
-    this.router.navigate([`/${country}`]);
+    this.router.navigate([`/country/${country}`]);
   }
 }

@@ -5,13 +5,14 @@ import {
   SimpleChanges,
   signal,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CountryOlympicData } from 'src/app/core/models/Olympic';
 
 @Component({
   selector: 'app-country-line-chart',
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [NgxChartsModule,RouterModule],
   templateUrl: './country-line-chart.component.html',
   styleUrls: ['./country-line-chart.component.scss'],
 })
@@ -70,7 +71,6 @@ export class CountryLineChartComponent implements OnChanges {
       value: participation.medalsCount,
     }));
 
-    // Format attendu par ngx-charts pour line chart
     this.chartData = [
       {
         name: this.country.country,
@@ -80,7 +80,5 @@ export class CountryLineChartComponent implements OnChanges {
     this.isLoading.set(false);
   }
 
-  onSelect(event: any): void {
-    console.log('Point sélectionné:', event);
-  }
+  
 }
