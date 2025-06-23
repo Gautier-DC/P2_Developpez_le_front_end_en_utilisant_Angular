@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { TitleCasePipe } from '@angular/common';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -10,7 +10,7 @@ import { CountryLineChartComponent } from 'src/components/country-line-chart/cou
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [HighlightComponent, CountryLineChartComponent, TitleCasePipe],
+  imports: [HighlightComponent, CountryLineChartComponent, TitleCasePipe, RouterModule],
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
