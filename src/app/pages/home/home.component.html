@@ -1,15 +1,9 @@
-<h1>Olympic games app</h1>
+<h1>Welcome to the Olympic games !</h1>
 <main>
   <h2>Medals per Country</h2>
 <div class='flex-center'>
-    <div class="highlight">
-        <p>Number of JOs</p>
-        <span><strong>{{(totalOlympics$ | async)}}</strong></span>
-    </div>
-    <div class="highlight">
-        <p>Number of Countries</p>
-        <span><strong>{{(totalCountries$ | async)}}</strong></span>
-    </div>
+    <app-highlight title='Number of JOs' [value]='totalOlympics()'></app-highlight>
+    <app-highlight title='Number of Countries' [value]='totalCountries()'></app-highlight>
 </div>
   <app-medals-pie-chart></app-medals-pie-chart>
 </main>

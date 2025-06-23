@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // ✅ Ajouter
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -11,11 +13,13 @@ import { MedalsPieChartComponent } from 'src/components/medals-pie-chart/medals-
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HighlightComponent } from "../components/highlight/highlight.component";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, ],
+  declarations: [AppComponent , NotFoundComponent, ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CommonModule,
     RouterModule,
@@ -23,8 +27,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HttpClientModule,
     NavComponent,
     MedalsPieChartComponent,
-    NavComponent
-  ],
+    NavComponent,
+    HighlightComponent,HomeComponent
+],
   providers: [OlympicService],
   bootstrap: [AppComponent],
 })

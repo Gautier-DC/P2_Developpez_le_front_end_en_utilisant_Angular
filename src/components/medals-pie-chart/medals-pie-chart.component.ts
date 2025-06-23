@@ -15,7 +15,6 @@ export class MedalsPieChartComponent implements OnInit {
   single: any[] = [];
   chartData: any[] = [];
   gradient: boolean = true;
-  view: any = [700, 400];
   showLegend: boolean = false;
   showLabels: boolean = true;
   isDoughnut: boolean = false;

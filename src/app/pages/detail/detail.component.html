@@ -1,0 +1,22 @@
+<main>
+  @if (isLoading()) {
+  <div class="loading">
+    <p>Chargement des données...</p>
+  </div>
+  } @else if ( country()){
+  <h2>{{ countryName() | titlecase }}</h2>
+
+  <div class="flex-center highlight-container">
+    <app-highlight title="Number of entries" [value]="totalParticipations()">
+    </app-highlight>
+    <app-highlight title="Total number medals" [value]="totalMedals()">
+    </app-highlight>
+    <app-highlight title="Total number of athletes" [value]="totalAthletes()">
+    </app-highlight>
+  </div>
+  } @else {
+  <h2>Sorry !</h2>
+  }
+  <app-country-line-chart [country]="country()"></app-country-line-chart>
+  <button class="btn btn-primary" navigate=''>Go back</button>
+</main>
