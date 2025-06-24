@@ -12,10 +12,10 @@ import { filter, take, switchMap } from 'rxjs/operators';
   styleUrls: ['./medals-pie-chart.component.scss'],
 })
 export class MedalsPieChartComponent implements OnInit {
+
   single: any[] = [];
   chartData: any[] = [];
   gradient: boolean = true;
-  view: any = [700, 400];
   showLegend: boolean = false;
   showLabels: boolean = true;
   isDoughnut: boolean = false;
@@ -65,6 +65,6 @@ export class MedalsPieChartComponent implements OnInit {
   
   onSelect(event: any) {
     const country = event.name.toLowerCase();
-    this.router.navigate([`/${country}`]);
+    this.router.navigate([`/country/${country}`]);
   }
 }

@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, inject, signal, computed} from '@angular/core';
 import { CountryOlympicData } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { HighlightComponent } from 'src/components/highlight/highlight.component';
 import { MedalsPieChartComponent } from 'src/components/medals-pie-chart/medals-pie-chart.component';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [HighlightComponent, MedalsPieChartComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public olympics$: Observable<CountryOlympicData[] | null | undefined > = of([]);
-  totalOlympics$ = this.olympicService.getTotalOlympics();
-  totalCountries$ = this.olympicService.getTotalCountries();
+  private olympicService = inject(OlympicService);
+
+  olympics = signal<CountryOlympicData[]>([]);
   
-  constructor(private olympicService: OlympicService) {}
-  
+  totalOlympics = computed(() => this.olympics().length);
+  totalCountries = computed(() => this.olympics().length);
+
   ngOnInit(): void {
-    this.olympics$ = this.olympicService.getOlympics();
-    console.log('olympics', this.olympics$);
+    this.olympicService.getOlympics().subscribe(data => {
+      this.olympics.set(data || []);
+    });
   }
 }
