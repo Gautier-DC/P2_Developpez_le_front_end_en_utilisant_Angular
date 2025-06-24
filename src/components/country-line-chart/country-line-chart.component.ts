@@ -21,7 +21,6 @@ export class CountryLineChartComponent implements OnChanges {
 
   isLoading = signal<boolean>(true);
   chartData: any[] = [];
-
   showXAxis: boolean = true;
   showYAxis: boolean = true;
   gradient: boolean = false;

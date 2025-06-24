@@ -12,6 +12,7 @@ import { filter, take, switchMap } from 'rxjs/operators';
   styleUrls: ['./medals-pie-chart.component.scss'],
 })
 export class MedalsPieChartComponent implements OnInit {
+
   single: any[] = [];
   chartData: any[] = [];
   gradient: boolean = true;

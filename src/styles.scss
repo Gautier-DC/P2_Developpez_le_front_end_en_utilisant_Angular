@@ -64,11 +64,11 @@ h2 {
 
 .chart-container {
   width: 90vw;
-  height: 600px;
   display: block;
   text-align: center;
   margin-bottom: 2rem;
-
+  position:relative;
+  height: 600px;
   @media (max-width: 768px) {
     height: 300px;
   }
