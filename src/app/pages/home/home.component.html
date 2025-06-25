@@ -1,9 +1,28 @@
 <h1>Welcome to the Olympic games !</h1>
 <main>
+  @if (isLoading()) {
+  <div class="loading">
+    <div class="spinner"></div>
+  </div>
+  } @else if (error()) {
+  <h2 class="error">Something wen wrong...</h2>
+  <p>{{ error() }}</p>
+  <button class="btn" (click)="retry()">Retry</button>
+  } @else if (hasData()) {
   <h2>Medals per Country</h2>
-<div class='flex-center'>
-    <app-highlight title='Number of JOs' [value]='totalOlympics()'></app-highlight>
-    <app-highlight title='Number of Countries' [value]='totalCountries()'></app-highlight>
-</div>
+  <div class="flex-center highlight-container">
+    <app-highlight
+      title="Number of JOs"
+      [value]="totalOlympics()"
+    ></app-highlight>
+    <app-highlight
+      title="Number of Countries"
+      [value]="totalCountries()"
+    ></app-highlight>
+  </div>
   <app-medals-pie-chart></app-medals-pie-chart>
+  } @else {
+  <h2 class="error">No data available</h2>
+  <p>Please check your internet connection or try again later.</p>
+  <button class="btn" (click)="retry()">Retry</button>}
 </main>

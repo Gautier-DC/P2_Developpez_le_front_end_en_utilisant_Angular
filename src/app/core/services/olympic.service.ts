@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, take } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, filter, map, tap } from 'rxjs/operators';
 import { CountryOlympicData } from '../models/Olympic';
 import { Participation } from '../models/Participation';
@@ -10,9 +10,7 @@ import { Participation } from '../models/Participation';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<
-    CountryOlympicData[] | null
-  >(null);
+  private olympics$ = new BehaviorSubject<CountryOlympicData[] | null>(null);
 
   constructor(private http: HttpClient) {}
 
@@ -21,24 +19,17 @@ export class OlympicService {
       tap((value) => {
         this.olympics$.next(value);
       }),
-      catchError((error, caught) => {
+      catchError((error) => {
         console.error('Olympic service - Error while charging:', error);
-       this.olympics$.next(null);
-        return caught;
+        this.olympics$.next(null);
+        return of(null);
       })
     );
   }
 
-  getOlympics(): Observable<CountryOlympicData[] | null> {
-    // if data has been charged
-    if (this.olympics$.value !== null) {
-      console.log('Data already cached', this.olympics$.value);
-      return this.olympics$.asObservable();
-    }
-
+  getOlympics(): Observable<CountryOlympicData[]> {
     return this.olympics$.pipe(
-      filter((data) => data !== null),
-      take(1)
+      filter((data): data is CountryOlympicData[] => data !== null)
     );
   }
 
@@ -63,14 +54,9 @@ export class OlympicService {
     );
   }
 
-  getTotalCountries(): Observable<number> {
-    return this.olympics$.pipe(
-      filter(
-        (olympics): olympics is CountryOlympicData[] =>
-          olympics !== null && olympics !== undefined
-      ),
-      map((olympics: CountryOlympicData[]) => olympics.length)
-    );
+  getTotalCountries(): number {
+    const data = this.olympics$.value;
+    return data ? data.length : 0;
   }
 
   getMedalsByCountry(): { name: string; totalMedals: number }[] {
@@ -89,13 +75,27 @@ export class OlympicService {
 
   getCountryByName(countryName: string): CountryOlympicData | undefined {
     const olympics = this.olympics$.value;
-    if (!olympics) return undefined;
+    if (!olympics) {
+      console.warn('Olympic service - No data loaded yet');
+      return undefined;
+    }
 
     const found = olympics.find(
       (country) => country.country.toLowerCase() === countryName.toLowerCase()
     );
 
-    console.log('getCountryByName - found:', found);
+    if (!found) {
+      console.warn(`Country '${countryName}' not found`);
+    }
     return found;
+  }
+
+  isDataLoaded(): boolean {
+    return this.olympics$.value !== null;
+  }
+
+  refreshData(): Observable<CountryOlympicData[] | null> {
+    this.olympics$.next(null); // Reset du cache
+    return this.loadInitialData();
   }
 }

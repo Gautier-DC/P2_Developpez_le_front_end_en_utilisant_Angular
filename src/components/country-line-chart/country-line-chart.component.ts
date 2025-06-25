@@ -8,19 +8,21 @@ import {
 import { RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CountryOlympicData } from 'src/app/core/models/Olympic';
-
+import { ChartData } from 'src/app/core/models/Chart';
 @Component({
   selector: 'app-country-line-chart',
   standalone: true,
-  imports: [NgxChartsModule,RouterModule],
+  imports: [NgxChartsModule, RouterModule],
   templateUrl: './country-line-chart.component.html',
   styleUrls: ['./country-line-chart.component.scss'],
 })
 export class CountryLineChartComponent implements OnChanges {
   @Input() country!: CountryOlympicData | null;
 
-  isLoading = signal<boolean>(true);
-  chartData: any[] = [];
+  chartData = signal<ChartData>([]);
+  isLoading = signal<boolean>(false);
+  chartError = signal<string | null>(null);
+
   showXAxis: boolean = true;
   showYAxis: boolean = true;
   gradient: boolean = false;
@@ -29,55 +31,57 @@ export class CountryLineChartComponent implements OnChanges {
   xAxisLabel: string = 'Dates';
   showYAxisLabel: boolean = true;
   timeline: boolean = false;
-  colorScheme = {
-    domain: [
-      '#956065', // Bordeaux
-      '#793D52', // Violet foncé
-      '#9780A1', // Violet moyen
-      '#89A1DB', // Bleu-violet
-      '#B8CCE8', // Bleu clair
-      '#9DC3E6', // Bleu très clair
-      '#A67C8A',
-      '#8B7BA8',
-      '#A5B8E1',
-      '#C8D5F0',
-      '#B3A5C7',
-      '#D0C2E0',
-    ],
-  };
+  colorScheme: string = 'cool';
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['country']) {
-      this.isLoading.set(true);
-
-      if (this.country) {
-        this.prepareChartData();
-      } else {
-        this.isLoading.set(false);
-      }
+    if (changes['country'] && this.country) {
+      this.generateChartData();
     }
   }
 
-  private prepareChartData(): void {
-    if (!this.country) {
-      this.isLoading.set(false);
-      return;
+  retry(): void {
+    if (this.country) {
+      this.generateChartData();
     }
+  }
 
-    // formating data for ngx-charts
-    const series = this.country.participations.map((participation) => ({
-      name: participation.year.toString(),
-      value: participation.medalsCount,
-    }));
+  private generateChartData(): void {
+    this.isLoading.set(true);
+    this.chartError.set(null);
 
-    this.chartData = [
+    try {
+      if (!this.country) {
+        this.chartError.set('No country set');
+        this.isLoading.set(false);
+        return;
+      }
+
+      if (!this.country.participations?.length) {
+        this.chartError.set('No data for this country');
+        this.chartData.set([]);
+        this.isLoading.set(false);
+        return;
+      }
+
+      const data = this.transformToChartData(this.country);
+      this.chartData.set(data);
+      this.isLoading.set(false);
+    } catch (error) {
+      console.error('Chart generation error:', error);
+      this.chartError.set('Can not load the chart');
+      this.isLoading.set(false);
+    }
+  }
+
+  private transformToChartData(country: CountryOlympicData): ChartData {
+    return [
       {
-        name: this.country.country,
-        series: series,
+        name: country.country,
+        series: country.participations.map((p) => ({
+          name: p.year.toString(),
+          value: p.medalsCount,
+        })),
       },
     ];
-    this.isLoading.set(false);
   }
-
-  
 }
