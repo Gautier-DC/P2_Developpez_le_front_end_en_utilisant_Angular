@@ -1,7 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-
 @Component({
   selector: 'app-highlight',
   standalone: true,

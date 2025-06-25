@@ -95,7 +95,7 @@ export class OlympicService {
   }
 
   refreshData(): Observable<CountryOlympicData[] | null> {
-    this.olympics$.next(null); // Reset du cache
+    this.olympics$.next(null); // clear current data
     return this.loadInitialData();
   }
 }
