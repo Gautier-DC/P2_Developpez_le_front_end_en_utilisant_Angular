@@ -1,8 +1,20 @@
-# OlympicGamesStarter
+# Olympic Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+Welcome to the Interactive dashboard for visualizing Olympic data by country with dynamic charts ! 🥇
+
+## Tech Stack
+
+* This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+* TypeScript - Primary language
+* NGX-Charts - Chart library (@swimlane/ngx-charts)
+* RxJS - Reactive data flow management
+* Angular Router - Navigation between views
+
+## Installation
 
 Don't forget to install your node_modules before starting (`npm install`).
+
+After that, you're all good !
 
 ## Development server
 
@@ -12,18 +24,17 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Where to start
+## Features
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+You are able to see in this app :
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+* Interactive Pie Chart: Medal visualization by country. On clic you can see the details of the selected country
+* Interactive Line Chart: Detailed information for each country
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+## Services
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+Everything happens in OlympicService, the Olympic data management. Initial data loading and caching and methods to get all informations.
 
-You're now ready to implement the requested features.
+This is a pretty simple App so there is not much more to say 😅.
 
-Good luck!
+Enjoy !
