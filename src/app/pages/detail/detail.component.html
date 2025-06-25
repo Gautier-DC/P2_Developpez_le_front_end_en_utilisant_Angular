@@ -1,11 +1,13 @@
 <main>
   @if (isLoading()) {
   <div class="loading">
-    <p>Chargement des données...</p>
+    <div class="spinner"></div>
   </div>
+  } @else if (error()) {
+  <h2 class="error">Sorry</h2>
+  <p>{{ error() }}</p>
   } @else if ( country()){
   <h2>{{ countryName() | titlecase }}</h2>
-
   <div class="flex-center highlight-container">
     <app-highlight title="Number of entries" [value]="totalParticipations()">
     </app-highlight>
@@ -14,9 +16,10 @@
     <app-highlight title="Total number of athletes" [value]="totalAthletes()">
     </app-highlight>
   </div>
-  } @else {
-  <h2>Sorry !</h2>
-  }
   <app-country-line-chart [country]="country()"></app-country-line-chart>
+  } @else {
+  <h2 class="error">Sorry !</h2>
+  <p>There is no data available</p>
+  }
   <button class="btn btn-primary" routerLink="/">Go back</button>
 </main>

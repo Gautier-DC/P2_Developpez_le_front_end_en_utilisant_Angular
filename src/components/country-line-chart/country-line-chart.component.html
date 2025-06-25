@@ -1,11 +1,18 @@
 <div class="chart-container">
   @if(isLoading()) {
-  <div class="loading">
-    <p>Chargement du graphique...</p>
+  <div class="chart-loading">
+    <div class="spinner"></div>
+    <p>Loading data...</p>
   </div>
-  } @else if (country && chartData && chartData.length > 0) {
+  } @else if (chartError()) {
+  <div class="chart-error">
+    <h3>Oops...</h3>
+    <p>{{ chartError() }}</p>
+    <button class="btn btn-secondary" (click)="retry()">Retry</button>
+  </div>
+  } @else if (country && chartData().length > 0) {
   <ngx-charts-line-chart
-    [results]="chartData"
+    [results]="chartData()"
     [gradient]="gradient"
     [xAxis]="showXAxis"
     [yAxis]="showYAxis"
@@ -15,10 +22,9 @@
     [xAxisLabel]="xAxisLabel"
     [timeline]="timeline"
     [autoScale]="true"
-    [customColors]="colorScheme"
+    [scheme]="colorScheme"
   >
   </ngx-charts-line-chart>
-
   } @else {
   <div class="no-data">
     <p>No data available for this country</p>

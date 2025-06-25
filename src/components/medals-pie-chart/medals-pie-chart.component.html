@@ -1,12 +1,30 @@
 <div class="chart-container">
+  @if (isLoading) {
+  <div class="chart-loading">
+    <div class="spinner"></div>
+    <p>Loading data...</p>
+  </div>
+  } @else if (error) {
+  <div class="error-container">
+    <h3>Error while loading</h3>
+    <p>{{ error }}</p>
+    <button class="btn btn-primary" (click)="retry()">Retry</button>
+  </div>
+  }@else if (chartData.length > 0) {
   <ngx-charts-pie-chart
-    
     [results]="chartData"
     [labels]="showLabels"
+    [scheme]="colorScheme"
+    [trimLabels]="false"
     [doughnut]="false"
     [gradient]="false"
     [labelFormatting]="labelFormatting"
     (select)="onSelect($event)"
   >
-  </ngx-charts-pie-chart>
+  </ngx-charts-pie-chart
+  >} @else {
+  <div class="no-data">
+    <p>No data available for the moment. Please refresh or comeback later</p>
+  </div>
+  }
 </div>

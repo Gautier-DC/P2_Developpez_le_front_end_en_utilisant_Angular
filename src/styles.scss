@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 :root {
-  --primary-color: #02838f;
+  --primary-color: rgb(2, 131, 143);
   --regular-radius: 6px;
 }
 
@@ -13,7 +13,6 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
   color: #333;
 }
 
@@ -45,6 +44,12 @@ h2 {
   text-align: center;
   width: fit-content;
   margin: 0 auto 2rem;
+  &.error {
+    font-size: 2rem;
+    background-color: transparent;
+    color: #ff4d4d;
+    font-weight: bold;
+  }
   @media (max-width: 768px) {
     font-size: 1.25rem;
   }
@@ -59,6 +64,7 @@ h2 {
 }
 
 .highlight-container {
+  width: 100%;
   margin-bottom: 2rem;
 }
 
@@ -67,7 +73,7 @@ h2 {
   display: block;
   text-align: center;
   margin-bottom: 2rem;
-  position:relative;
+  position: relative;
   height: 600px;
   @media (max-width: 768px) {
     height: 300px;
@@ -76,6 +82,7 @@ h2 {
 
 .btn {
   background-color: var(--primary-color);
+  text-decoration: none;
   color: #fff;
   border: none;
   border-radius: var(--regular-radius);
@@ -88,5 +95,39 @@ h2 {
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     transform: translateY(-2px);
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(2, 131, 143, 0.3);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.chart-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  border-radius: 8px;
+  height: 100%;
+
+  p {
+    color: #6c757d;
+    font-style: italic;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
