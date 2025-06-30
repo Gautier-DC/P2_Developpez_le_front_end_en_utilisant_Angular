@@ -67,7 +67,7 @@ export class HomeComponent {
 
     this.olympicService
       .getOlympics()
-      .pipe(takeUntilDestroyed(this.destroyRef)) // 🎯 Passe le DestroyRef
+      .pipe(takeUntilDestroyed(this.destroyRef)) 
       .subscribe({
         next: (data) => {
           this.olympics.set(data || []);

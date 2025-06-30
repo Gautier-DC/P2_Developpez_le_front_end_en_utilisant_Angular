@@ -7,16 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { NavComponent } from 'src/components/nav/nav.component';
 import { OlympicService } from './core/services/olympic.service';
 import { MedalsPieChartComponent } from 'src/components/medals-pie-chart/medals-pie-chart.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { HighlightComponent } from "../components/highlight/highlight.component";
+import { HighlightComponent } from '../components/highlight/highlight.component';
 
 @NgModule({
-  declarations: [AppComponent , NotFoundComponent, ],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -25,11 +24,10 @@ import { HighlightComponent } from "../components/highlight/highlight.component"
     RouterModule,
     NgxChartsModule,
     HttpClientModule,
-    NavComponent,
     MedalsPieChartComponent,
-    NavComponent,
-    HighlightComponent,HomeComponent
-],
+    HighlightComponent,
+    HomeComponent,
+  ],
   providers: [OlympicService],
   bootstrap: [AppComponent],
 })

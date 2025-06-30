@@ -1,16 +1,13 @@
-<app-nav></app-nav>
 @if (isReady()) {
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
 } @else {
-  <div class="app-loading">
-    <div class="spinner"></div>
-    <p>Initialisation de l'application...</p>
-  </div>
-}
-
-@if (initError()) {
-  <div class="app-error-toast">
-    <p>⚠️ {{ initError() }}</p>
-    <button (click)="dismissError()">✕</button>
-  </div>
+<div class="app-loading">
+  <div class="spinner"></div>
+  <p>Application is Loading, please wait...</p>
+</div>
+} @if (initError()) {
+<div class="app-error-toast">
+  <p>⚠️ {{ initError() }}</p>
+  <button (click)="dismissError()">✕</button>
+</div>
 }

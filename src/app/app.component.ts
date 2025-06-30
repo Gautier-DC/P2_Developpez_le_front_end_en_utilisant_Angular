@@ -33,7 +33,7 @@ export class AppComponent {
         error: (error) => {
           console.error('App initialization failed:', error);
           this.appState.set('error');
-          this.initError.set('Impossible de charger les données olympiques');
+          this.initError.set('Can not load Olympics data...');
         }
       });
   }
